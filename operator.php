@@ -18,6 +18,8 @@
 
         $tekst1 = $skrive1 . $skrive2;
         $tekst2 = $skrive1 . " " . $skrive2 . "s vei";
+        $terningkast = rand(1,6);
+
 
         echo "Summen blir $plus <br>";
         echo "Differansen blir $minus <br>";
@@ -31,6 +33,10 @@
         echo "<br><br>";
 
         echo "<a href='https://nfk.itslearning.com/index.aspx'>itslearning</a>";
+        
+        echo "Du fikk $terningkast på terningen. <br>";
+        echo "Det er ";
+
         ?>
     </body>
 </html>
