@@ -1,0 +1,21 @@
+.php {
+    background-color: blue;
+}
+
+.brukerdiv {
+    background-color: antiquewhite;
+    margin-right: 300px;
+    margin-left: 300px;
+    text-align: center;
+    align-content: center;
+}
+
+.bilder {
+    height: 50%;
+    width: 50%;
+}
+
+.meny {
+    display: flex;
+    flex-direction: row;
+}

@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrer deg</title>
+</head>
+<body>
+    
+</body>
+</html>
+<?php include "meny.php"; ?>
+
 <form method="POST">
     Brukernavn
     <br><input type="text" name="brukernavn"><br><br>
@@ -27,6 +41,22 @@ include "azure.php";
 if(isset($_POST["leggtil"])){
     $brukernavn = $_POST["brukernavn"];
     $fornavn = $_POST["fornavn"];
-    
+    $etternavn = $_POST["etternavn"];
+    $bio = $_POST["bio"];
+    $passord = $_POST["passord"];
+    $epost = $_POST["epost"];
+    $tlf = $_POST["tlf"];
+    $skole = $_POST["skole"];
+    $bosted = $_POST["bosted"];
+    $fødselsdato = $_POST["fodselsdato"];
+
+    $sql = "INSERT INTO bruker (brukernavn, fornavn, etternavn, bio, 
+    passord, epost, tlf, skole, bosted, fodselsdato) 
+    VALUES ('$brukernavn', '$fornavn', '$etternavn','$bio',
+    '$passord', '$epost','$tlf', '$skole', '$bosted', '$fødselsdato')";
+
+    if($con->query($sql)) {
+        echo "Bruker med navn $brukernavn ble lagt til i databasen";
+    }
 }
 ?>
