@@ -1,9 +1,10 @@
 <?php
 include "azure.php";
 
-$id_fra_link = $_GET['bruker_id'];
+session_start();
+$id = $_SESSION['login_id'];
 
-$sql = "SELECT*FROM bruker Where idbruker='$id_fra_link'";
+$sql = "SELECT*FROM bruker Where idbruker='$id'";
 $resultat = $con->query($sql);
 
 $rad = $resultat->fetch_assoc();
@@ -29,7 +30,7 @@ $rad = $resultat->fetch_assoc();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bruker</title>
+    <title>Min bruker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -46,8 +47,9 @@ $rad = $resultat->fetch_assoc();
             <p>$bosted</p>
             <img src='img/$bilde' alt='person bilde' height='627'>";
 
+            include "upload.php";
             echo "<div class='bilde_div'>";
-            $sql = "SELECT * FROM media WHERE idbruker='$id_fra_link'";
+            $sql = "SELECT * FROM media WHERE idbruker='$id'";
             $resultat = $con->query($sql);
 
             while($rad = $resultat->fetch_assoc()) {
@@ -56,7 +58,8 @@ $rad = $resultat->fetch_assoc();
             }
             echo "</div>
             <div class='innlegg'>";
-                $sql = "SELECT * FROM innlegg WHERE idbruker='$id_fra_link'";
+                include "oprett_innlegg.php";
+                $sql = "SELECT * FROM innlegg WHERE idbruker='$id'";
                 $resultat = $con->query($sql);
 
                 while($rad = $resultat->fetch_assoc()){

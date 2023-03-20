@@ -17,8 +17,7 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
     $allowTypes = array('jpg','png','jpeg','gif','pdf');
     if(in_array($fileType, $allowTypes)){
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-            $sql = "INSERT into media (media_navn, idbruker, date) VALUES ('$fileName', '$id_fra_link', NOW())";
-            echo $sql;
+            $sql = "INSERT into media (media_navn, idbruker, date) VALUES ('$fileName', '$id', NOW())";
             $insert = $con->query($sql);
             if($insert){
                 $statusMsg = "The file ".$fileName. " has been uploaded succesfully.";

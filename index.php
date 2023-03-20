@@ -1,3 +1,9 @@
+<?php
+session_start();
+include "security.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,19 +13,23 @@
     <title>Speed</title>
 </head>
 <body>
-    <?php include "meny.php";
-    include "azure.php";
+    <div class='container'>
+        <?php echo "<div class='meny'>";
+            include "meny.php";
+        echo "</div>";
+        include "azure.php";
     
 
-    $sql = "SELECT idbruker, brukernavn FROM bruker ";
-    $resultat = $con->query($sql);
+        $sql = "SELECT idbruker, brukernavn FROM bruker ";
+        $resultat = $con->query($sql);
 
-    while($rad = $resultat->fetch_assoc()){
-        $idbruker = $rad['idbruker'];
-        $brukernavn = $rad['brukernavn'];
+        while($rad = $resultat->fetch_assoc()){
+            $idbruker = $rad['idbruker'];
+            $brukernavn = $rad['brukernavn'];
 
-        echo "<br><a href='bruker.php?bruker_id=$idbruker'>$brukernavn</a>";
-    }
-    ?>
+            echo "<br><a href='bruker.php?bruker_id=$idbruker'>$brukernavn</a>";
+        }
+        ?>
+    </div>
 </body>
 </html>
