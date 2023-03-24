@@ -1,6 +1,9 @@
 <?php
 include "azure.php";
 
+session_start();
+include "security.php";
+
 $id_fra_link = $_GET['bruker_id'];
 
 $sql = "SELECT*FROM bruker Where idbruker='$id_fra_link'";
@@ -34,9 +37,10 @@ $rad = $resultat->fetch_assoc();
 </head>
 <body>
     <div class="php">
-        <?php
-        echo "<div class='brukerdiv'>
-            <h1>$brukernavn</h1>
+        
+        <div class='brukerdiv'>
+            <?php
+            echo "<h1>$brukernavn</h1>
             <h3>$fornavn $etternavn</h3>
             <p>$bio</p>
             <p>$fodselsdato</p>
@@ -45,28 +49,56 @@ $rad = $resultat->fetch_assoc();
             <p>$skole</p>
             <p>$bosted</p>
             <img src='img/$bilde' alt='person bilde' height='627'>";
+            ?>
 
-            echo "<div class='bilde_div'>";
-            $sql = "SELECT * FROM media WHERE idbruker='$id_fra_link'";
-            $resultat = $con->query($sql);
+            <div class='bilde_div'>
+                <?php
+                $sql = "SELECT * FROM media WHERE idbruker='$id_fra_link'";
+                $resultat = $con->query($sql);
 
-            while($rad = $resultat->fetch_assoc()) {
-                $media_navn = $rad['media_navn'];
-                echo "<img class='bilder'src='img/$media_navn'>";
-            }
-            echo "</div>
-            <div class='innlegg'>";
-                $sql = "SELECT * FROM innlegg WHERE idbruker='$id_fra_link'";
+                while($rad = $resultat->fetch_assoc()) {
+                    $media_navn = $rad['media_navn'];
+                    echo "<img class='bilder'src='img/$media_navn'>";
+                }
+                ?>
+            </div>
+            <div class='innlegg'>
+                <?php
+                $sql = "SELECT * FROM innlegg WHERE idbruker='$id_fra_link' ORDER BY date DESC";
                 $resultat = $con->query($sql);
 
                 while($rad = $resultat->fetch_assoc()){
                     $tekst = $rad['tekst'];
-                    echo "<p>$tekst</p>";
+                    $dato_opprettet = $rad['date'];
+                    $idinnlegg = $rad['idinnlegg'];
+                    echo "<h4>$dato_opprettet</h4>
+                    <p>$tekst</p>";
+
+                    include "kommentarer.php";
+
+                    echo "<form method='POST'>
+                        <input name='tekst_kommentar'>
+                        <input name='idinnlegg' type='hidden' value='$idinnlegg'>
+                        <input type='submit' name='submit_kommentar' value='Svar'>
+                    </form>";
                 }
-            echo "</div>
-        </div>";
-        
-        ?>
+                if(isset($_POST["submit_innlegg"])){
+                    $tekst = $_POST["text_innlegg"];
+                    $idinnlegg = $_POST["idinnlegg"];
+                    $id = $_SESSION['login_id'];
+
+                    $sql = "INSERT INTO innlegg_kommentar (tekst, idbruker, idinnlegg, date) VALUES ('$tekst', '$id', '$idinnlegg', now() )";
+                
+                    if($con->query($sql)){
+                        echo "Kommentar ble lagt til i databasen";
+                    } else {
+                        echo "Feilmelding: $con->error";
+                    }
+                }
+                ?>
+            </div>
+        </div>        
+
     </div>
     
 </body>

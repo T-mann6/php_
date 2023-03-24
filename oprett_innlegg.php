@@ -15,6 +15,4 @@ if(isset($_POST["submit_innlegg"])){
         echo "Feilmelding: $con->error";
     }
 }
-
-
 ?>
