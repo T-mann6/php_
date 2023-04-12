@@ -57,8 +57,11 @@ $rad = $resultat->fetch_assoc();
                 $resultat = $con->query($sql);
 
                 while($rad = $resultat->fetch_assoc()) {
+                    $idmedia = $rad['idmedia'];
                     $media_navn = $rad['media_navn'];
-                    echo "<img class='bilder'src='img/$media_navn'>";
+                    echo "<a class='bildelink' href='bildevisning.php?media_id=$idmedia'>
+                    <img class='bilder'src='img/$media_navn'>
+                    </a>";
                 }
                 ?>
             </div>
@@ -72,9 +75,9 @@ $rad = $resultat->fetch_assoc();
                     $dato_opprettet = $rad['date'];
                     $idinnlegg = $rad['idinnlegg'];
                     echo "<h4>$dato_opprettet</h4>
-                    <p>$tekst</p>";
+                        <p>$tekst</p>";
 
-                    include "kommentarer.php";
+                    include "innlegg_kommentarer.php";
 
                     echo "<form method='POST'>
                         <input name='tekst_kommentar'>
@@ -82,12 +85,12 @@ $rad = $resultat->fetch_assoc();
                         <input type='submit' name='submit_kommentar' value='Svar'>
                     </form>";
                 }
-                if(isset($_POST["submit_innlegg"])){
-                    $tekst = $_POST["text_innlegg"];
+                if(isset($_POST["submit_kommentar"])){
+                    $text = $_POST["tekst_kommentar"];
                     $idinnlegg = $_POST["idinnlegg"];
                     $id = $_SESSION['login_id'];
 
-                    $sql = "INSERT INTO innlegg_kommentar (tekst, idbruker, idinnlegg, date) VALUES ('$tekst', '$id', '$idinnlegg', now() )";
+                    $sql = "INSERT INTO innlegg_kommentar (tekst_kommentar, idbruker, idinnlegg, date) VALUES ('$text', '$id', '$idinnlegg', now() )";
                 
                     if($con->query($sql)){
                         echo "Kommentar ble lagt til i databasen";
@@ -98,8 +101,6 @@ $rad = $resultat->fetch_assoc();
                 ?>
             </div>
         </div>        
-
     </div>
-    
 </body>
 </html>

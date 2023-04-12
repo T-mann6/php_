@@ -8,21 +8,51 @@
     margin-left: 300px;
     text-align: center;
     align-content: center;
-}
-
-.bilder {
-    height: 50%;
-    width: 50%;
+    width: fit-content;
 }
 
 .meny {
+    background-color: antiquewhite;
+    margin-left: 300px;
+    margin-right: 300px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .bilde_div {
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
+    height: fit-content;
+    width: fit-content;
+}
+
+.container {
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+}
+
+.list {
+    background-color: antiquewhite;
+    margin-right: 300px;
+    margin-left: 300px;
+    text-align: center;
+    align-content: center;
+}
+
+.bildelink {
+    height: fit-content;
+    width: fit-content;
+}
+
+.mine_bilder {
+    height: 50%;
+    width: 50%;
+}
+
+.bilder {
+    height: 50%;
+    width: 50%;
 }

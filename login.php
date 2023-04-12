@@ -36,5 +36,6 @@
             }
         }
     ?>
+    <a href="leggtil.php">Har ikke bruker?</a>
 </body>
 </html>

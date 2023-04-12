@@ -7,7 +7,7 @@
 if(isset($_POST["submit_innlegg"])){
     include "azure.php";
     $tekst = $_POST["text_innlegg"];
-    $sql = "INSERT INTO innlegg (tekst, idbruker, date) VALUES ('$tekst', '$id_fra_link', now() )";
+    $sql = "INSERT INTO innlegg (tekst, idbruker, date) VALUES ('$tekst', '$id', now() )";
 
     if($con->query($sql)){
         echo "Innlegg ble lagt til i databasen";

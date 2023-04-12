@@ -35,9 +35,9 @@ $rad = $resultat->fetch_assoc();
 </head>
 <body>
     <div class="php">
-        <?php
-        echo "<div class='brukerdiv'>
-            <h1>$brukernavn</h1>
+        <div class='brukerdiv'>
+            <?php
+            echo "<h1>$brukernavn</h1>
             <h3>$fornavn $etternavn</h3>
             <p>$bio</p>
             <p>$fodselsdato</p>
@@ -54,22 +54,47 @@ $rad = $resultat->fetch_assoc();
 
             while($rad = $resultat->fetch_assoc()) {
                 $media_navn = $rad['media_navn'];
-                echo "<img class='bilder'src='img/$media_navn'>";
+                echo "<img class='mine_bilder'src='img/$media_navn'>";
             }
-            echo "</div>
-            <div class='innlegg'>";
+            ?>
+        </div>
+            <div class='innlegg'>
+                <?php
                 include "oprett_innlegg.php";
                 $sql = "SELECT * FROM innlegg WHERE idbruker='$id'";
                 $resultat = $con->query($sql);
 
                 while($rad = $resultat->fetch_assoc()){
                     $tekst = $rad['tekst'];
-                    echo "<p>$tekst</p>";
+                    $dato_opprettet = $rad['date'];
+                    $idinnlegg = $rad['idinnlegg'];
+                    echo "<h4>$dato_opprettet</h4>
+                        <p>$tekst</p>";
+                
+                include "innlegg_kommentarer.php";
+
+                    echo "<form method='POST'>
+                        <input name='tekst_kommentar'>
+                        <input name='idinnlegg' type='hidden' value='$idinnlegg'>
+                        <input type='submit' name='submit_kommentar' value='Svar'>
+                    </form>";
                 }
-            echo "</div>
-        </div>";
-        
-        ?>
+                if(isset($_POST["submit_kommentar"])){
+                    $text = $_POST["tekst_kommentar"];
+                    $idinnlegg = $_POST["idinnlegg"];
+                    $id = $_SESSION['login_id'];
+
+                    $sql = "INSERT INTO innlegg_kommentar (tekst_kommentar, idbruker, idinnlegg, date) VALUES ('$text', '$id', '$idinnlegg', now() )";
+                
+                    if($con->query($sql)){
+                        echo "Kommentar ble lagt til i databasen";
+                    } else {
+                        echo "Feilmelding: $con->error";
+                    }
+                }
+                ?>
+            </div>
+        </div>
     </div>
     
 </body>
