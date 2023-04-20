@@ -4,7 +4,7 @@ include "azure.php";
 session_start();
 include "security.php";
 
-$id_fra_link = $_GET['bruker_id'];
+$id_fra_link = $_GET['bruker_id'];//sender deg til den brukeren du trykte på i index.php
 
 $sql = "SELECT*FROM bruker Where idbruker='$id_fra_link'";
 $resultat = $con->query($sql);

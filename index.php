@@ -1,6 +1,6 @@
 <?php
-session_start();
-include "security.php";
+session_start();//starter session
+include "security.php";//inkluderer security.php
 ?>
 
 
@@ -16,20 +16,20 @@ include "security.php";
 <body>
     <div class='container'>
         <?php echo "<div class='meny_index'>";
-            include "meny.php";
+            include "meny.php";//inkluderer menyen
         echo "</div>";
-        include "azure.php";
+        include "azure.php";//nettsiden kobles til databasen 
         ?>
         <div class='list'>
         <?php
-        $sql = "SELECT idbruker, brukernavn FROM bruker ";
+        $sql = "SELECT idbruker, brukernavn FROM bruker ";//henter alle brukerne lagt i databasen
         $resultat = $con->query($sql);
 
-        while($rad = $resultat->fetch_assoc()){
+        while($rad = $resultat->fetch_assoc()){//looper gjennom brukerne
             $idbruker = $rad['idbruker'];
             $brukernavn = $rad['brukernavn'];
 
-            echo "<br><a href='bruker.php?bruker_id=$idbruker'>$brukernavn</a>";
+            echo "<br><a href='bruker.php?bruker_id=$idbruker'>$brukernavn</a>";//viser all brukerne i en liste og linker til bruker.php
         }
         ?>
         </div>

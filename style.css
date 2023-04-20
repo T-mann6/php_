@@ -32,6 +32,7 @@
     background-color: blue;
     display: flex;
     flex-direction: column;
+    height: max-content;
 }
 
 .list {
@@ -55,4 +56,17 @@
 .bilder {
     height: 50%;
     width: 50%;
+}
+
+.stort_bilde {
+    height: 50%;
+    width: 50%;
+}
+
+.registrer {
+    background-color: antiquewhite;
+    margin-right: 300px;
+    margin-left: 300px;
+    text-align: center;
+    align-content: center;
 }

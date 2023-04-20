@@ -9,5 +9,5 @@
         <div class='Registrer deg'>
             <a href='leggtil.php'>Registrer deg</a>
         </div>
-    </div>";
+    </div>";//bruker echo for å lage en meny
 ?>

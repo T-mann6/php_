@@ -5,5 +5,5 @@ mysqli_real_connect($con,
 "tarald.mysql.database.azure.com", 
 "T_mann_69", 
 "Produkt_69", 
-"speed", 3306, MYSQLI_CLIENT_SSL);
+"speed", 3306, MYSQLI_CLIENT_SSL);//kobler til databasen
 ?>
